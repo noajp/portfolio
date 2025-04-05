@@ -46,7 +46,7 @@ export default function RootLayout({
       >
 
         {/* 共通ナビゲーション */}
-        <header className="bg-white shadow p-4 flex gap-6 text-sm">
+        <header className="absolute top-0 left-0 w-full z-10 flex gap-6 p-6 text-white text-sm">
           <Link href="/">home</Link>
           <Link href="/vlog">vlog</Link>
           <Link href="/info">info</Link>
