@@ -11,7 +11,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
+  {/* セクション内容 */}
+  <div className="flex-1 flex items-center justify-center">
+    <h2 className="text-2xl text-black font-semibold">
+      Next Section - Your Menu or Content Here
+    </h2>
+  </div>
       <section className="h-screen bg-white flex">
         {/* 左側の文章 */}
         <div className="w-1/2 flex items-center justify-center p-8">
@@ -23,7 +28,6 @@ export default function HomePage() {
             </p>
           </div>
         </div>
-
         {/* 右側の写真ギャラリー */}
         <div className="w-1/2 p-4">
           <div className="grid grid-cols-3 gap-2">
