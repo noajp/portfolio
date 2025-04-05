@@ -44,14 +44,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-
-        {/* 共通ナビゲーション */}
-        <header className="absolute top-0 left-0 w-full z-10 flex gap-6 p-6 text-white text-sm">
-          <Link href="/">Home</Link>
-          <Link href="/vlog">Vlog</Link>
-          <Link href="/info">Info</Link>
-        </header>
-
         {/* 各ページの内容 */}
         <main>{children}</main>
       </body>
