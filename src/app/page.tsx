@@ -34,7 +34,23 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-      <section className="h-screen bg-white flex">
+      <section className="bg-white flex items-center justify-center">
+        <div className="flex justify-center space-x-8 py-4">
+          <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
+            Home
+          </button>
+          <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
+            Pictures
+          </button>
+          <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
+            Clips
+          </button>
+          <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
+            Store
+          </button>
+        </div>
+      </section>
+        <section className="h-screen bg-white flex">
         {/* 左側の文章 */}
         <div className="w-1/2 flex items-center justify-center p-8">
           <div>
@@ -45,6 +61,7 @@ export default function HomePage() {
             </p>
           </div>
         </div>
+
         {/* 右側の写真 */}
         <div className="w-1/2 flex items-center justify-center p-4">
           <img
@@ -56,6 +73,7 @@ export default function HomePage() {
         </div>
       </section>
       <section className="h-screen bg-white flex">
+
         {/* 右側の写真 */}
         <div className="w-1/2 flex items-center justify-center p-4">
           <img
@@ -65,6 +83,7 @@ export default function HomePage() {
             onClick={() => openModal("/photo3.jpg")}
           />
         </div>
+
         {/* 左側の文章 */}
         <div className="w-1/2 flex items-center justify-center p-4">
           <div>
