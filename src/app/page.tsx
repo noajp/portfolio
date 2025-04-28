@@ -83,11 +83,13 @@ export default function HomePage() {
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
           onClick={closeModal}
         >
+          <div className="p-4 bg-transparent">
           <img
             src={modalImage}
             alt="Modal"
             className="max-h-[90vh] max-w-[90vw] object-contain"
           />
+          </div>
         </div>
       )}
     </main>
