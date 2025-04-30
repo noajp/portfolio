@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState("");
@@ -18,17 +19,16 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="h-screen bg-white flex items-center justify-center">
-        <div className="grid grid-cols-6 gap-6 p-9">
-          {Array.from({ length: 8 }, (_, i) => (
-            <div key={i} className="relative">
-              <img
-                src={`/IMG/IMG_59${71 + i}.JPG`}
-                alt={`/IMG/IMG_59${71 + i}`}
-                className={`w-full h-auto object-cover cursor-pointer ${
-                  i === 0 ? "animate-slide" : ""
-                }`}
-                onClick={() => openModal(`/IMG/IMG_59${71 + i}.JPG`)}
+      {/* 画像をクリックするとモーダルが開く */}
+    <section className="h-[89vh] bg-white flex items-center justify-center overflow-hidden">
+      <div className="flex w-full">
+        {Array.from({ length: 4 }, (_, i) => (
+        <div key={i} className="relative w-[25vw]">
+          <img
+          src={`/IMG/IMG_59${71 + i}.JPG`}
+          alt={`IMG_59${71 + i}`}
+          className="w-full h-screen object-cover mix-blend-normal"
+          onClick={() => openModal(`/IMG/IMG_59${71 + i}.JPG`)}
               />
             </div>
           ))}
