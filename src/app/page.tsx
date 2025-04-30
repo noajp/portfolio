@@ -23,12 +23,12 @@ export default function HomePage() {
           {Array.from({ length: 11 }, (_, i) => (
             <div key={i} className="relative">
               <img
-                src={`/IMG_59${69 + i}.JPG`}
-                alt={`IMG_59${69 + i}`}
+                src={`/IMG/IMG_59${69 + i}.JPG`}
+                alt={`/IMG/IMG_59${69 + i}`}
                 className={`w-full h-auto object-cover cursor-pointer ${
                   i === 0 ? "animate-slide" : ""
                 }`}
-                onClick={() => openModal(`/IMG_59${69 + i}.JPG`)}
+                onClick={() => openModal(`/IMG/IMG_59${69 + i}.JPG`)}
               />
             </div>
           ))}
@@ -48,6 +48,9 @@ export default function HomePage() {
           <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
             Store
           </button>
+          <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
+            Vlog
+          </button>
         </div>
       </section>
         <section className="h-screen bg-white flex">
@@ -65,10 +68,10 @@ export default function HomePage() {
         {/* 右側の写真 */}
         <div className="w-1/2 flex items-center justify-center p-4">
           <img
-            src="/photo2.jpg"
+            src="/IMG/photo2.jpg"
             alt="Photo"
             className="max-h-full max-w-full object-contain cursor-pointer"
-            onClick={() => openModal("/photo2.jpg")}
+            onClick={() => openModal("/IMG/photo2.jpg")}
           />
         </div>
       </section>
@@ -77,10 +80,10 @@ export default function HomePage() {
         {/* 右側の写真 */}
         <div className="w-1/2 flex items-center justify-center p-4">
           <img
-            src="/photo3.jpg"
+            src="/IMG/photo3.jpg"
             alt="Photo"
             className="max-h-full max-w-full object-contain cursor-pointer"
-            onClick={() => openModal("/photo3.jpg")}
+            onClick={() => openModal("/IMG/photo3.jpg")}
           />
         </div>
 
