@@ -20,15 +20,15 @@ export default function HomePage() {
     <main>
       <section className="h-screen bg-white flex items-center justify-center">
         <div className="grid grid-cols-6 gap-6 p-9">
-          {Array.from({ length: 11 }, (_, i) => (
+          {Array.from({ length: 8 }, (_, i) => (
             <div key={i} className="relative">
               <img
-                src={`/IMG/IMG_59${69 + i}.JPG`}
-                alt={`/IMG/IMG_59${69 + i}`}
+                src={`/IMG/IMG_59${71 + i}.JPG`}
+                alt={`/IMG/IMG_59${71 + i}`}
                 className={`w-full h-auto object-cover cursor-pointer ${
                   i === 0 ? "animate-slide" : ""
                 }`}
-                onClick={() => openModal(`/IMG/IMG_59${69 + i}.JPG`)}
+                onClick={() => openModal(`/IMG/IMG_59${71 + i}.JPG`)}
               />
             </div>
           ))}
