@@ -22,18 +22,14 @@ export default function HomePage() {
     <main>
       {/* 画像をクリックするとモーダルが開く */}
       <section className="h-[89vh] bg-white flex items-center justify-center overflow-hidden">
-        <div className="flex w-full">
-          {Array.from({ length: 4 }, (_, i) => (
-            <div key={i} className="relative w-[25vw]">
-              <img
-                src={`/IMG/IMG_59${71 + i}.JPG`}
-                alt={`IMG_59${71 + i}`}
-                className="w-full h-screen object-cover mix-blend-normal"
-                onClick={() => openModal(`/IMG/IMG_59${71 + i}.JPG`)}
-              />
-            </div>
-          ))}
-        </div>
+      <div className="relative w-full">
+        <img
+        src="/IMG/IMG_home.JPG"
+        alt="Home Image"
+        className="w-full h-screen object-cover mix-blend-normal"
+        onClick={() => openModal("/IMG/IMG_home.JPG")}
+        />
+      </div>
       </section>
       <section className="bg-white flex items-center justify-center">
         <div className="flex justify-center space-x-8 py-4">
