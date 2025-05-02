@@ -150,40 +150,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-black">
-      {/* Header */}
-      <header className="bg-black text-white p-4 sticky top-0 z-10">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">MONOCHROME STUDIO</h1>
-          <nav className="hidden md:block">
-            <ul className="flex space-x-6">
-              <li className="hover:underline cursor-pointer">HOME</li>
-              <li className="hover:underline cursor-pointer">SHOP</li>
-              <li className="hover:underline cursor-pointer">ABOUT</li>
-              <li className="hover:underline cursor-pointer">CONTACT</li>
-            </ul>
-          </nav>
-          <div className="flex items-center space-x-4">
-            <button className="hover:text-gray-300">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-            <button 
-              className="hover:text-gray-300 relative" 
-              onClick={() => setIsCartOpen(!isCartOpen)}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-              </svg>
-              {cart.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-white text-black text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                  {cart.reduce((total, item) => total + item.quantity, 0)}
-                </span>
-              )}
-            </button>
-          </div>
-        </div>
-      </header>
 
       {/* Main content */}
       <main className="container mx-auto px-4 py-8">
