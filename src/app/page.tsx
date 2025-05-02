@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-
+import React from "react";
+import Link from "next/link";
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,15 +21,15 @@ export default function HomePage() {
   return (
     <main>
       {/* 画像をクリックするとモーダルが開く */}
-    <section className="h-[89vh] bg-white flex items-center justify-center overflow-hidden">
-      <div className="flex w-full">
-        {Array.from({ length: 4 }, (_, i) => (
-        <div key={i} className="relative w-[25vw]">
-          <img
-          src={`/IMG/IMG_59${71 + i}.JPG`}
-          alt={`IMG_59${71 + i}`}
-          className="w-full h-screen object-cover mix-blend-normal"
-          onClick={() => openModal(`/IMG/IMG_59${71 + i}.JPG`)}
+      <section className="h-[89vh] bg-white flex items-center justify-center overflow-hidden">
+        <div className="flex w-full">
+          {Array.from({ length: 4 }, (_, i) => (
+            <div key={i} className="relative w-[25vw]">
+              <img
+                src={`/IMG/IMG_59${71 + i}.JPG`}
+                alt={`IMG_59${71 + i}`}
+                className="w-full h-screen object-cover mix-blend-normal"
+                onClick={() => openModal(`/IMG/IMG_59${71 + i}.JPG`)}
               />
             </div>
           ))}
@@ -39,9 +40,11 @@ export default function HomePage() {
           <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
             Home
           </button>
-          <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
-            Pictures
-          </button>
+          <Link href="/pictures">
+            <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
+              Pictures
+            </button>
+          </Link>
           <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
             Clips
           </button>
@@ -53,7 +56,7 @@ export default function HomePage() {
           </button>
         </div>
       </section>
-        <section className="h-screen bg-white flex">
+      <section className="h-screen bg-white flex">
         {/* 左側の文章 */}
         <div className="w-1/2 flex items-center justify-center p-8">
           <div>
@@ -76,7 +79,6 @@ export default function HomePage() {
         </div>
       </section>
       <section className="h-screen bg-white flex">
-
         {/* 右側の写真 */}
         <div className="w-1/2 flex items-center justify-center p-4">
           <img
@@ -106,11 +108,11 @@ export default function HomePage() {
           onClick={closeModal}
         >
           <div className="p-4 bg-transparent">
-          <img
-            src={modalImage}
-            alt="Modal"
-            className="max-h-[90vh] max-w-[90vw] object-contain"
-          />
+            <img
+              src={modalImage}
+              alt="Modal"
+              className="max-h-[90vh] max-w-[90vw] object-contain"
+            />
           </div>
         </div>
       )}
