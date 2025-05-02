@@ -36,22 +36,22 @@ export default function HomePage() {
           <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
             Home
           </button>
-            <Link href="/pictures">
+            <Link href="/other/pictures">
             <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
               Pictures
             </button>
             </Link>
-          <Link href="/clips">
+          <Link href="/other/clips">
           <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
             Clips
           </button>
           </Link>
-          <Link href="/stores">
+          <Link href="/other/stores">
           <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
             Store
           </button>
           </Link>
-          <Link href="/vlog">
+          <Link href="/other/vlog">
           <button className="px-6 py-4 text-xl font-bold text-black hover:underline">
             Vlog
           </button>
