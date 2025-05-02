@@ -9,60 +9,84 @@ interface Product {
   price: number;
   description: string;
   imageUrl: string;
+  category: string;
 }
 
 export default function Home() {
-  // 商品データのサンプル
+  // Sample product data
   const [products, setProducts] = useState<Product[]>([
     {
       id: 1,
-      name: "ミニマルデザインTシャツ",
-      price: 4500,
-      description: "シンプルで洗練されたデザインのTシャツ。高品質な素材を使用しています。",
+      name: "Spring Bloom Lightroom Preset",
+      price: 45,
+      description: "Enhance your spring photography with vibrant greens and soft pastels that highlight the beauty of the season.",
       imageUrl: "/api/placeholder/400/500",
+      category: "Lightroom Preset"
     },
     {
       id: 2,
-      name: "モノトーンジャケット",
-      price: 12800,
-      description: "どんなスタイルにも合わせやすい万能なモノトーンジャケット。",
+      name: "Summer Glow DaVinci Resolve LUT",
+      price: 59,
+      description: "Add a warm golden glow to your summer footage with this professional cinematic LUT package.",
       imageUrl: "/api/placeholder/400/500",
+      category: "DaVinci Resolve LUT"
     },
     {
       id: 3,
-      name: "クラシックデニム",
-      price: 9800,
-      description: "着心地の良い高品質デニム。長く愛用できる一着です。",
+      name: "Fall Colors Lightroom Preset",
+      price: 45,
+      description: "Emphasize the rich warm tones of autumn with this carefully crafted preset collection.",
       imageUrl: "/api/placeholder/400/500",
+      category: "Lightroom Preset"
     },
     {
       id: 4,
-      name: "レザーバッグ",
-      price: 18500,
-      description: "耐久性に優れた本革を使用した洗練されたデザインのバッグ。",
+      name: "Winter Clarity Node System",
+      price: 75,
+      description: "Professional node setup for DaVinci Resolve to enhance winter scenes with crystal clear definition.",
       imageUrl: "/api/placeholder/400/500",
+      category: "DaVinci Resolve Node information"
     },
     {
       id: 5,
-      name: "モノクロームスニーカー",
-      price: 8500,
-      description: "快適な履き心地と洗練されたデザインを両立したスニーカー。",
+      name: "Spring Portrait DaVinci Resolve LUT",
+      price: 59,
+      description: "Perfect for portrait cinematography during spring, with natural skin tones and soft background enhancement.",
       imageUrl: "/api/placeholder/400/500",
+      category: "DaVinci Resolve LUT"
     },
     {
       id: 6,
-      name: "シルバーアクセサリー",
-      price: 5200,
-      description: "シンプルながらも存在感のあるシルバーアクセサリー。",
+      name: "Summer Night Node System",
+      price: 75,
+      description: "Enhance the mood of summer night footage with this comprehensive node system for DaVinci Resolve.",
       imageUrl: "/api/placeholder/400/500",
+      category: "DaVinci Resolve Node information"
+    },
+    {
+      id: 7,
+      name: "Fall Cinematic DaVinci Resolve LUT",
+      price: 59,
+      description: "Create a cinematic look for your autumn footage with rich colors and professional grading.",
+      imageUrl: "/api/placeholder/400/500",
+      category: "DaVinci Resolve LUT"
+    },
+    {
+      id: 8,
+      name: "Winter Frost Lightroom Preset",
+      price: 45,
+      description: "Enhance the cool tones and magical atmosphere of winter scenes with this premium preset collection.",
+      imageUrl: "/api/placeholder/400/500",
+      category: "Lightroom Preset"
     },
   ]);
 
   const [cart, setCart] = useState<(Product & { quantity: number })[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-  // カートに商品を追加
+  // Add product to cart
   const addToCart = (product: Product) => {
     setCart(prevCart => {
       const existingProduct = prevCart.find(item => item.id === product.id);
@@ -78,12 +102,12 @@ export default function Home() {
     });
   };
 
-  // カートから商品を削除
+  // Remove product from cart
   const removeFromCart = (productId: number) => {
     setCart(prevCart => prevCart.filter(item => item.id !== productId));
   };
 
-  // カート内の商品数を変更
+  // Update quantity in cart
   const updateQuantity = (productId: number, quantity: number) => {
     if (quantity <= 0) {
       removeFromCart(productId);
@@ -98,27 +122,38 @@ export default function Home() {
     );
   };
 
-  // カートの合計金額を計算
+  // Calculate total price
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
   };
 
-  // 商品詳細モーダルを表示
+  // Show product details modal
   const showProductDetails = (product: Product) => {
     setSelectedProduct(product);
   };
 
-  // 商品詳細モーダルを閉じる
+  // Close product details modal
   const closeProductDetails = () => {
     setSelectedProduct(null);
   };
 
+  // Filter products by category
+  const getFilteredProducts = () => {
+    if (!activeCategory) return products;
+    return products.filter(product => product.category === activeCategory);
+  };
+
+  // Filter products by season
+  const getProductsBySeason = (season: string) => {
+    return products.filter(product => product.name.toLowerCase().includes(season.toLowerCase()));
+  };
+
   return (
     <div className="min-h-screen bg-white text-black">
-      {/* ヘッダー */}
+      {/* Header */}
       <header className="bg-black text-white p-4 sticky top-0 z-10">
         <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">MONOCHROME</h1>
+          <h1 className="text-2xl font-bold">MONOCHROME STUDIO</h1>
           <nav className="hidden md:block">
             <ul className="flex space-x-6">
               <li className="hover:underline cursor-pointer">HOME</li>
@@ -150,42 +185,68 @@ export default function Home() {
         </div>
       </header>
 
-      {/* メインコンテンツ */}
+      {/* Main content */}
       <main className="container mx-auto px-4 py-8">
-        {/* ヒーロー部分 */}
+        {/* Hero section */}
         <section className="mb-12">
           <div className="relative h-96 bg-gray-900 flex items-center justify-center mb-4">
             <div className="text-center text-white z-10 p-4">
-              <h2 className="text-4xl font-bold mb-4">ミニマルでスタイリッシュな<br />モノトーンコレクション</h2>
-              <p className="mb-6">シンプルなデザインで日常をエレガントに</p>
+              <h2 className="text-4xl font-bold mb-4">Premium Color Grading<br />Assets Collection</h2>
+              <p className="mb-6">Professional tools for photographers and filmmakers</p>
               <button className="bg-white text-black px-6 py-2 hover:bg-gray-200 transition">
-                コレクションを見る
+                VIEW COLLECTION
               </button>
             </div>
           </div>
         </section>
 
-        {/* 商品カテゴリー */}
+        {/* Product categories */}
         <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-center">カテゴリー</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center">Categories</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-gray-100 p-8 text-center cursor-pointer hover:bg-gray-200 transition">
-              <h3 className="text-xl font-semibold">ウェア</h3>
+            <div 
+              className={`p-8 text-center cursor-pointer transition ${activeCategory === "Lightroom Preset" ? "bg-gray-200" : "bg-gray-100 hover:bg-gray-200"}`}
+              onClick={() => setActiveCategory(activeCategory === "Lightroom Preset" ? null : "Lightroom Preset")}
+            >
+              <h3 className="text-xl font-semibold">Lightroom Preset</h3>
             </div>
-            <div className="bg-gray-100 p-8 text-center cursor-pointer hover:bg-gray-200 transition">
-              <h3 className="text-xl font-semibold">アクセサリー</h3>
+            <div 
+              className={`p-8 text-center cursor-pointer transition ${activeCategory === "DaVinci Resolve LUT" ? "bg-gray-200" : "bg-gray-100 hover:bg-gray-200"}`}
+              onClick={() => setActiveCategory(activeCategory === "DaVinci Resolve LUT" ? null : "DaVinci Resolve LUT")}
+            >
+              <h3 className="text-xl font-semibold">DaVinci Resolve LUT</h3>
             </div>
-            <div className="bg-gray-100 p-8 text-center cursor-pointer hover:bg-gray-200 transition">
-              <h3 className="text-xl font-semibold">シューズ</h3>
+            <div 
+              className={`p-8 text-center cursor-pointer transition ${activeCategory === "DaVinci Resolve Node information" ? "bg-gray-200" : "bg-gray-100 hover:bg-gray-200"}`}
+              onClick={() => setActiveCategory(activeCategory === "DaVinci Resolve Node information" ? null : "DaVinci Resolve Node information")}
+            >
+              <h3 className="text-xl font-semibold">DaVinci Resolve Node information</h3>
             </div>
           </div>
         </section>
 
-        {/* 商品リスト */}
+        {/* Seasonal Collections */}
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold mb-6 text-center">Seasonal Collections</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {["Spring", "Summer", "Fall", "Winter"].map(season => (
+              <div key={season} className="relative overflow-hidden group cursor-pointer bg-gray-100 hover:bg-gray-200 transition">
+                <div className="p-8 text-center">
+                  <h3 className="text-xl font-semibold">{season}</h3>
+                  <p className="mt-2">{getProductsBySeason(season).length} products</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Product list */}
         <section>
-          <h2 className="text-3xl font-bold mb-6 text-center">新着アイテム</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {products.map(product => (
+          <h2 className="text-3xl font-bold mb-6 text-center">
+            {activeCategory ? `${activeCategory} Collection` : "Featured Products"}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {getFilteredProducts().map(product => (
               <div key={product.id} className="border border-gray-200 hover:shadow-lg transition">
                 <div className="relative h-64 cursor-pointer" onClick={() => showProductDetails(product)}>
                   <img 
@@ -195,13 +256,14 @@ export default function Home() {
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold">{product.name}</h3>
-                  <p className="text-xl font-bold mt-1">¥{product.price.toLocaleString()}</p>
+                  <span className="text-sm text-gray-500">{product.category}</span>
+                  <h3 className="text-lg font-semibold mt-1">{product.name}</h3>
+                  <p className="text-xl font-bold mt-1">${product.price}</p>
                   <button 
                     className="mt-3 w-full bg-black text-white py-2 hover:bg-gray-800 transition"
                     onClick={() => addToCart(product)}
                   >
-                    カートに追加
+                    ADD TO CART
                   </button>
                 </div>
               </div>
@@ -210,33 +272,34 @@ export default function Home() {
         </section>
       </main>
 
-      {/* フッター */}
+      {/* Footer */}
       <footer className="bg-black text-white p-8 mt-12">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-xl font-bold mb-4">MONOCHROME</h3>
-              <p>シンプルでスタイリッシュなアイテムを<br />あなたの日常に。</p>
+              <h3 className="text-xl font-bold mb-4">MONOCHROME STUDIO</h3>
+              <p>Professional color grading tools<br />for photographers and filmmakers.</p>
             </div>
             <div>
-              <h4 className="font-semibold mb-3">ショップ情報</h4>
+              <h4 className="font-semibold mb-3">Information</h4>
               <ul className="space-y-2">
-                <li>会社概要</li>
-                <li>ストア一覧</li>
-                <li>採用情報</li>
+                <li>About Us</li>
+                <li>Our Team</li>
+                <li>Careers</li>
+                <li>Privacy Policy</li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-3">カスタマーサポート</h4>
+              <h4 className="font-semibold mb-3">Customer Support</h4>
               <ul className="space-y-2">
-                <li>よくある質問</li>
-                <li>お問い合わせ</li>
-                <li>返品・交換</li>
-                <li>配送情報</li>
+                <li>FAQ</li>
+                <li>Contact Us</li>
+                <li>Refund Policy</li>
+                <li>Technical Support</li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-3">フォローする</h4>
+              <h4 className="font-semibold mb-3">Follow Us</h4>
               <div className="flex space-x-4">
                 <a href="#" className="hover:text-gray-300">
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -257,12 +320,12 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-6 text-sm text-center">
-            <p>&copy; 2025 MONOCHROME. All rights reserved.</p>
+            <p>&copy; 2025 Monochrome Studio. All rights reserved.</p>
           </div>
         </div>
       </footer>
 
-      {/* カートサイドバー */}
+      {/* Shopping cart sidebar */}
       {isCartOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden">
           <div 
@@ -271,7 +334,7 @@ export default function Home() {
           ></div>
           <div className="absolute right-0 top-0 h-full w-full sm:w-96 bg-white shadow-xl transform transition-transform duration-300">
             <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-              <h2 className="text-xl font-bold">ショッピングカート</h2>
+              <h2 className="text-xl font-bold">Shopping Cart</h2>
               <button 
                 className="text-gray-500 hover:text-black"
                 onClick={() => setIsCartOpen(false)}
@@ -284,7 +347,7 @@ export default function Home() {
             
             <div className="p-4 h-full overflow-y-auto pb-32">
               {cart.length === 0 ? (
-                <p className="text-center py-8 text-gray-500">カートに商品がありません</p>
+                <p className="text-center py-8 text-gray-500">Your cart is empty</p>
               ) : (
                 <>
                   {cart.map(item => (
@@ -298,7 +361,7 @@ export default function Home() {
                       </div>
                       <div className="ml-4 flex-grow">
                         <h3 className="font-medium">{item.name}</h3>
-                        <p className="text-gray-600">¥{item.price.toLocaleString()}</p>
+                        <p className="text-gray-600">${item.price}</p>
                         <div className="flex items-center mt-2">
                           <button 
                             className="w-8 h-8 border border-gray-300 flex items-center justify-center"
@@ -332,11 +395,11 @@ export default function Home() {
             {cart.length > 0 && (
               <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
                 <div className="flex justify-between mb-4">
-                  <span className="font-bold">合計:</span>
-                  <span className="font-bold">¥{calculateTotal().toLocaleString()}</span>
+                  <span className="font-bold">Total:</span>
+                  <span className="font-bold">${calculateTotal()}</span>
                 </div>
                 <button className="w-full bg-black text-white py-3 hover:bg-gray-800 transition">
-                  レジに進む
+                  CHECKOUT
                 </button>
               </div>
             )}
@@ -344,7 +407,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* 商品詳細モーダル */}
+      {/* Product details modal */}
       {selectedProduct && (
         <div className="fixed inset-0 z-50 overflow-hidden flex items-center justify-center">
           <div 
@@ -370,22 +433,35 @@ export default function Home() {
                 />
               </div>
               <div className="w-full md:w-1/2 p-6">
+                <span className="text-sm text-gray-500">{selectedProduct.category}</span>
                 <h2 className="text-2xl font-bold mb-2">{selectedProduct.name}</h2>
-                <p className="text-2xl font-bold mb-4">¥{selectedProduct.price.toLocaleString()}</p>
+                <p className="text-2xl font-bold mb-4">${selectedProduct.price}</p>
                 <p className="text-gray-600 mb-6">{selectedProduct.description}</p>
                 
                 <div className="mb-6">
-                  <h3 className="font-semibold mb-2">サイズ</h3>
-                  <div className="flex space-x-2">
-                    {['S', 'M', 'L', 'XL'].map(size => (
-                      <button 
-                        key={size}
-                        className="border border-gray-300 w-10 h-10 flex items-center justify-center hover:border-black"
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
+                  <h3 className="font-semibold mb-2">Compatibility</h3>
+                  <ul className="text-gray-600">
+                    {selectedProduct.category === "Lightroom Preset" && (
+                      <>
+                        <li>• Adobe Lightroom Classic</li>
+                        <li>• Adobe Lightroom CC</li>
+                        <li>• Adobe Camera Raw</li>
+                      </>
+                    )}
+                    {selectedProduct.category === "DaVinci Resolve LUT" && (
+                      <>
+                        <li>• DaVinci Resolve 17+</li>
+                        <li>• DaVinci Resolve Studio</li>
+                        <li>• Compatible with other editing software that supports .cube files</li>
+                      </>
+                    )}
+                    {selectedProduct.category === "DaVinci Resolve Node information" && (
+                      <>
+                        <li>• DaVinci Resolve 17+</li>
+                        <li>• DaVinci Resolve Studio</li>
+                      </>
+                    )}
+                  </ul>
                 </div>
                 
                 <button 
@@ -395,18 +471,25 @@ export default function Home() {
                     closeProductDetails();
                   }}
                 >
-                  カートに追加
+                  ADD TO CART
                 </button>
                 
                 <div className="border-t border-gray-200 pt-4">
                   <div className="mb-4">
-                    <h3 className="font-semibold mb-2">商品詳細</h3>
-                    <p className="text-gray-600">高品質な素材を使用し、丁寧に作られた製品です。シンプルなデザインで様々なスタイルに合わせやすくなっています。</p>
+                    <h3 className="font-semibold mb-2">Product Details</h3>
+                    <p className="text-gray-600">
+                      {selectedProduct.category === "Lightroom Preset" && 
+                        "This preset package includes multiple variations to suit different lighting conditions. Easy to install and apply with a single click."}
+                      {selectedProduct.category === "DaVinci Resolve LUT" && 
+                        "This LUT package includes .cube files in both 33-point and 65-point formats for maximum compatibility and quality."}
+                      {selectedProduct.category === "DaVinci Resolve Node information" && 
+                        "Comprehensive node system with detailed documentation on how to adjust parameters for your specific footage."}
+                    </p>
                   </div>
                   
                   <div>
-                    <h3 className="font-semibold mb-2">配送・返品</h3>
-                    <p className="text-gray-600">通常3〜5営業日以内に発送いたします。商品到着後14日以内であれば返品・交換が可能です。</p>
+                    <h3 className="font-semibold mb-2">Delivery</h3>
+                    <p className="text-gray-600">Instant digital download. Files will be available immediately after purchase.</p>
                   </div>
                 </div>
               </div>
