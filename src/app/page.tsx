@@ -62,10 +62,9 @@ export default function HomePage() {
         {/* 左側の文章 */}
         <div className="w-1/2 flex items-center justify-center p-8">
           <div>
-            <h2 className="text-3xl font-bold text-black mb-4">About me</h2>
+            <h2 className="text-3xl font-bold text-black mb-4">Hello World,Welacome to my site</h2>
             <p className="text-lg text-gray-700">
-              Welcome to our portfolio! We are passionate about creativity and innovation.
-              Explore our work and discover how we can help bring your ideas to life.
+            This is my portfolio and selling some picture preset,footage lut and ebook
             </p>
           </div>
         </div>
